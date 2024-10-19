@@ -18,13 +18,9 @@ function Layout() {
     <Flex maxW="large" h="auto" position="relative">
       <Sidebar />
       
-        <Flex justify="center" align="center" height="100vh" width="full">
-          <Spinner size="xl" color="ui.main" />
-        </Flex>
-     (
+       
         <Outlet />
-      )
-
+      
     </Flex>
   )
 }

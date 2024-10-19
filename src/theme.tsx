@@ -11,7 +11,7 @@ const theme = extendTheme({
   fonts: {heading: "Poppins", body: "Poppins"},
   colors: {
     ui: {
-      main: "#78256F", 
+      main: "#008000", 
       secondary: "#EDF2F7",
       success: "#48BB78",
       danger: "#E53E3E",

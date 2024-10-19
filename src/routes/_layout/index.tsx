@@ -1,7 +1,7 @@
 // index.tsx
-import { Box, Container, Text, Spinner } from "@chakra-ui/react";
+import { Box, Container, Text } from "@chakra-ui/react";
 import { createFileRoute } from "@tanstack/react-router";
-import {  useState } from "react";
+import MultipleChoiceQuestionnaire from "../../components/Portfolio/MultipleChoiceQuestionnaire";
 
 export const Route = createFileRoute("/_layout/")({
   component: Dashboard,
@@ -9,34 +9,25 @@ export const Route = createFileRoute("/_layout/")({
 
 function Dashboard() {
 
-
-  const [loading, setLoading] = useState(true);
-
  
   return (
     <>
       <Container maxW="80%">
-        
-        {loading ? (
-          <Box textAlign="center" p={8}>
-            <Spinner
-              thickness="4px"
-              speed="0.65s"
-              emptyColor="gray.200"
-              color="ui.main"
-              size="xl"
-            />
-          </Box>
-        ) : (
+
           <>
             <Text fontSize="2xl" fontWeight="semibold" mb={4}>
-              Dashboard
+              Creación de un portafolio de inversión
             </Text>
             <Text fontSize="lg" fontWeight="medium">
-              Welcome to the dashboard
+              Contesta las preguntas para obtener una recomendación de portafolio.
             </Text>
           </>
-        )}
+          <br />
+
+        <Box  p={4} shadow="md" borderWidth="0.8px" borderRadius="md"   mb={4} bg="#FFFFFF">
+          <MultipleChoiceQuestionnaire />
+        </Box>
+  
       </Container>
     </>
   );

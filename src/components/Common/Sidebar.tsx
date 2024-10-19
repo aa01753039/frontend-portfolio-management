@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react"
 import {  FiMenu } from "react-icons/fi"
 
-import Logo from "../../assets/images/logo_positivo.svg"
+import Logo from "../../assets/images/logo-ip.svg"
 import SidebarItems from "./SidebarItems"
 
 const Sidebar = () => {
@@ -74,7 +74,7 @@ const Sidebar = () => {
           borderRadius={12}
         >
           <Box>
-            <Image src={Logo} alt="Logo" w="180px" maxW="2xs" p={6} />
+            <Image src={Logo} alt="Logo" w="220px" maxW="2xs" p={6} />
             <SidebarItems />
           </Box>
           <Box>
