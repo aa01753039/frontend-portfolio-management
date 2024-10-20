@@ -27,77 +27,76 @@ const FinalReturnDisplay: React.FC<FinalReturnDisplayProps> = ({ finalReturn }) 
             <Grid templateColumns="repeat(2, 1fr)" gap={6}>
                 <GridItem>
                     <Box p={4} borderWidth={1} borderRadius="lg">
-                        <Text fontWeight="bold">Risk Level:</Text>
+                        <Text fontWeight="bold">Tu nivel de Riesgo:</Text>
                         <Text>{Math.round(Number(risk_level) * 100)}%</Text>
                     </Box>
                 </GridItem>
                 <GridItem>
                     <Box p={4} borderWidth={1} borderRadius="lg">
-                        <Text fontWeight="bold">Investment Term:</Text>
-                        <Text>{investment_term/365} years</Text>
+                        <Text fontWeight="bold">Plazo de Inversión:</Text>
+                        <Text>{investment_term / 365} años</Text>
                     </Box>
                 </GridItem>
                 <GridItem>
                     <Box p={4} borderWidth={1} borderRadius="lg">
-                        <Text fontWeight="bold">Objective:</Text>
+                        <Text fontWeight="bold">Objetivo:</Text>
                         <Text>{objective}</Text>
                     </Box>
                 </GridItem>
                 <GridItem>
                     <Box p={4} borderWidth={1} borderRadius="lg">
-                        <Text fontWeight="bold">Investment Term Days:</Text>
-                        <Text>{investment_term_days} days</Text>
+                        <Text fontWeight="bold">Días de Inversión:</Text>
+                        <Text>{investment_term_days} días</Text>
                     </Box>
                 </GridItem>
                 <GridItem>
                     <Box p={4} borderWidth={1} borderRadius="lg">
-                        <Text fontWeight="bold">Expected Daily Return:</Text>
+                        <Text fontWeight="bold">Retorno Diario Esperado:</Text>
                         <Text>{expected_daily_return}%</Text>
                     </Box>
                 </GridItem>
                 <GridItem>
                     <Box p={4} borderWidth={1} borderRadius="lg">
-                        <Text fontWeight="bold">Expected Daily Risk:</Text>
+                        <Text fontWeight="bold">Riesgo Diario Esperado:</Text>
                         <Text>{expected_daily_risk}%</Text>
                     </Box>
                 </GridItem>
                 <GridItem>
                     <Box p={4} borderWidth={1} borderRadius="lg">
-                        <Text fontWeight="bold">Expected Annual Return:</Text>
+                        <Text fontWeight="bold">Retorno Anual Esperado:</Text>
                         <Text>{expected_annual_return}%</Text>
                     </Box>
                 </GridItem>
                 <GridItem>
                     <Box p={4} borderWidth={1} borderRadius="lg">
-                        <Text fontWeight="bold">Expected Annual Risk:</Text>
+                        <Text fontWeight="bold">Riesgo Anual Esperado:</Text>
                         <Text>{expected_annual_risk}%</Text>
                     </Box>
                 </GridItem>
                 <GridItem>
                     <Box p={4} borderWidth={1} borderRadius="lg">
-                        <Text fontWeight="bold">Confidence Level:</Text>
-                        <Text>{confidence_level*100}%</Text>
+                        <Text fontWeight="bold">Nivel de Confianza (VaR):</Text>
+                        <Text>{confidence_level * 100}%</Text>
                     </Box>
                 </GridItem>
                 <GridItem>
                     <Box p={4} borderWidth={1} borderRadius="lg">
-                        <Text fontWeight="bold">Daily VaR:</Text>
+                        <Text fontWeight="bold">VaR Diario:</Text>
                         <Text>{daily_var}%</Text>
                     </Box>
                 </GridItem>
                 <GridItem>
                     <Box p={4} borderWidth={1} borderRadius="lg">
-                        <Text fontWeight="bold">Weekly VaR:</Text>
+                        <Text fontWeight="bold">VaR Semanal:</Text>
                         <Text>{weekly_var}%</Text>
                     </Box>
                 </GridItem>
                 <GridItem>
                     <Box p={4} borderWidth={1} borderRadius="lg">
-                        <Text fontWeight="bold">Yearly VaR:</Text>
+                        <Text fontWeight="bold">VaR Anual:</Text>
                         <Text>{yearly_var}%</Text>
                     </Box>
                 </GridItem>
-                
             </Grid>
         </Box>
     );

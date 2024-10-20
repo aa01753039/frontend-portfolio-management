@@ -50,7 +50,7 @@ const Sidebar = () => {
               
               
               <Text color={"gray"} noOfLines={1} fontSize="sm" p={2}>
-              v1.1.1 beta
+              v1.0.0 beta
                 </Text>
             </Flex>
           </DrawerBody>
@@ -88,7 +88,7 @@ const Sidebar = () => {
             fontSize="sm"
            
           >
-            v1.1.1 beta
+            v1.0.0 beta
           </Text>
           </Box>
           

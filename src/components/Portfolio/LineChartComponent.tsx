@@ -3,12 +3,18 @@ import ReactApexChart from 'react-apexcharts';
 import { Box } from "@chakra-ui/react";
 
 type TickerHistoricalData = {
-  date: string;
-  price: number;
+  historical_data: {
+    date: string;
+    price: number;
+  }[];
+  first_price: number;
+  last_price: number;
+  absolute_change: number;
+  percentage_change: number;
 };
 
 type LineChartComponentProps = {
-  historicalData: Record<string, TickerHistoricalData[]>;
+  historicalData: Record<string, TickerHistoricalData>;
 };
 
 type LineChartComponentState = {
@@ -32,7 +38,7 @@ class LineChartComponent extends React.Component<LineChartComponentProps, LineCh
           width: '100%',
         },
         title: {
-          text: 'Historical Prices',
+          text: 'Precios Históricos',
           align: 'left',
           style: {
             fontSize: '16px',
@@ -53,7 +59,7 @@ class LineChartComponent extends React.Component<LineChartComponentProps, LineCh
         xaxis: {
           type: 'datetime',
           labels: {
-            format: 'dd MMM',
+            format: 'MMM yyyy',
             style: {
               fontSize: '12px',
               fontFamily: 'poppins',
@@ -71,7 +77,7 @@ class LineChartComponent extends React.Component<LineChartComponentProps, LineCh
           enabled: true,
           theme: 'dark',
           x: {
-            format: 'dd MMM',
+            format: 'dd MMM yyyy',
           },
           style: {
             fontFamily: 'poppins',
@@ -83,8 +89,11 @@ class LineChartComponent extends React.Component<LineChartComponentProps, LineCh
           fontWeight: 'bold',
           fontFamily: 'poppins',
         },
-        colors: ['#5A88C2'],
-      },
+        colors: [
+            '#5A88C2', '#FF5733', '#28B463', '#C70039', '#900C3F', 
+            '#FFC300', '#581845', '#DAF7A6', '#FF33F6', '#33FF57',
+            '#FF6F61', '#33AFFF', '#FFAA33', '#B833FF', '#33FFAA'
+          ]      },
     };
   }
 
@@ -98,10 +107,10 @@ class LineChartComponent extends React.Component<LineChartComponentProps, LineCh
     }
   }
 
-  updateChartData(historicalData: Record<string, TickerHistoricalData[]>) {
+  updateChartData(historicalData: Record<string, TickerHistoricalData>) {
     const chartData = Object.keys(historicalData).map((ticker) => ({
       name: ticker,
-      data: historicalData[ticker].map((entry) => ({
+      data: historicalData[ticker].historical_data.map((entry) => ({
         x: entry.date,
         y: entry.price,
       })),
@@ -114,7 +123,7 @@ class LineChartComponent extends React.Component<LineChartComponentProps, LineCh
 
   render() {
     return (
-      <Box p={4} shadow="md" borderWidth="0.8px" borderRadius="md" ml={4} minW="150px" textAlign="center" mb={8} bg="#FFFFFF">
+      <Box p={4} shadow="sm" borderWidth="0.8px" borderRadius="lg" ml={4} minW="150px" textAlign="center" mb={8} bg="#FFFFFF">
         <ReactApexChart
           options={this.state.chartOptions}
           series={this.state.chartData}
