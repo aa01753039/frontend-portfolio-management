@@ -9,7 +9,7 @@ RUN npm install
 
 COPY ./ /app/
 
-ARG VITE_API_URL="https://portal-reclutamiento-api-960656103048.us-central1.run.app"
+ARG VITE_API_URL="https://api-176079702469.us-central1.run.app"
 
 RUN npm run build
 
