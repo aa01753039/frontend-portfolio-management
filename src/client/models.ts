@@ -40,6 +40,7 @@ interface OptimizationResult {
   confidence_level: number;
   value_at_risk: ValueAtRisk;
   historical_data: Record<string, HistoricalData>;
+  correlation_matrix: number[][];
 }
 
 interface FinalReturn {
