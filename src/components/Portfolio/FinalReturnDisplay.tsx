@@ -8,7 +8,7 @@ interface FinalReturnDisplayProps {
 const FinalReturnDisplay: React.FC<FinalReturnDisplayProps> = ({ finalReturn }) => {
     const {
         risk_level,
-        investment_term,
+     
         portfolio: {
             objective,
             investment_term_days,
@@ -34,7 +34,7 @@ const FinalReturnDisplay: React.FC<FinalReturnDisplayProps> = ({ finalReturn }) 
                 <GridItem>
                     <Box p={4} borderWidth={1} borderRadius="lg">
                         <Text fontWeight="bold">Plazo de Inversión:</Text>
-                        <Text>{investment_term / 365} años</Text>
+                        <Text>{investment_term_days / 365} años</Text>
                     </Box>
                 </GridItem>
                 <GridItem>

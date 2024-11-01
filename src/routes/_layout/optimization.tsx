@@ -24,7 +24,6 @@ function Optimization() {
         navigate({ to: "/" }); // Redirect to the index route
     };
 
-    console.log("Received data:", responseData);
 
     return (
         <Container maxW="80%">
@@ -37,7 +36,7 @@ function Optimization() {
                     <GridItem w="100%">
                         <AllocationDisplay finalReturn={responseData} />
                         {/* Place HeatmapComponent directly below AllocationDisplay in the same column */}
-                        <HeatmapComponent historicalData={responseData.portfolio.historical_data} />
+                        <HeatmapComponent correlationMatrix={responseData.portfolio.correlation_matrix} />
                     </GridItem>
 
                     {/* Second Row: Line Chart Below Both Columns */}

@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutIndexImport } from './routes/_layout/index'
 import { Route as LayoutOptimizationImport } from './routes/_layout/optimization'
+import { Route as LayoutCalculatorImport } from './routes/_layout/calculator'
 
 // Create/Update Routes
 
@@ -32,6 +33,11 @@ const LayoutOptimizationRoute = LayoutOptimizationImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
+const LayoutCalculatorRoute = LayoutCalculatorImport.update({
+  path: '/calculator',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -39,6 +45,10 @@ declare module '@tanstack/react-router' {
     '/_layout': {
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
+    }
+    '/_layout/calculator': {
+      preLoaderRoute: typeof LayoutCalculatorImport
+      parentRoute: typeof LayoutImport
     }
     '/_layout/optimization': {
       preLoaderRoute: typeof LayoutOptimizationImport
@@ -54,7 +64,11 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
-  LayoutRoute.addChildren([LayoutOptimizationRoute, LayoutIndexRoute]),
+  LayoutRoute.addChildren([
+    LayoutCalculatorRoute,
+    LayoutOptimizationRoute,
+    LayoutIndexRoute,
+  ]),
 ])
 
 /* prettier-ignore-end */

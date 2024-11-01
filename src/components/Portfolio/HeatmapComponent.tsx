@@ -2,21 +2,14 @@ import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { Box } from "@chakra-ui/react";
 
-type TickerHistoricalData = {
-  historical_data: {
-    date: string;
-    price: number;
-  }[];
-};
-
 type HeatmapComponentProps = {
-  historicalData: Record<string, TickerHistoricalData>;
+  correlationMatrix: Record<string, Record<string, number>>;
 };
 
 type HeatmapComponentState = {
   heatmapData: {
     name: string;
-    data: { x: string, y: number }[];
+    data: { x: string; y: number }[];
   }[];
   chartOptions: ApexCharts.ApexOptions;
 };
@@ -86,7 +79,7 @@ class HeatmapComponent extends React.Component<HeatmapComponentProps, HeatmapCom
           enabled: true,
           theme: 'dark',
           y: {
-            formatter: function(value: number) {
+            formatter: function (value: number) {
               return value.toFixed(3); // Display with 3 decimals
             },
           },
@@ -95,67 +88,31 @@ class HeatmapComponent extends React.Component<HeatmapComponentProps, HeatmapCom
           enabled: false,
         },
         legend: {
-            show: false, // Disable the legend that shows color scale
-          },
+          show: false, // Disable the legend that shows color scale
+        },
       },
     };
   }
 
   componentDidMount() {
-    this.updateHeatmapData(this.props.historicalData);
+    this.updateHeatmapData(this.props.correlationMatrix);
   }
 
   componentDidUpdate(prevProps: HeatmapComponentProps) {
-    if (prevProps.historicalData !== this.props.historicalData) {
-      this.updateHeatmapData(this.props.historicalData);
+    if (prevProps.correlationMatrix !== this.props.correlationMatrix) {
+      this.updateHeatmapData(this.props.correlationMatrix);
     }
   }
 
-  // Helper function to calculate the Pearson correlation coefficient
-  calculateCorrelation(data1: number[], data2: number[]): number {
-    const n = data1.length;
-    const mean1 = data1.reduce((sum, value) => sum + value, 0) / n;
-    const mean2 = data2.reduce((sum, value) => sum + value, 0) / n;
-  
-    const covariance = data1.reduce((sum, value, index) => {
-      return sum + (value - mean1) * (data2[index] - mean2);
-    }, 0);
-  
-    const stdDev1 = Math.sqrt(data1.reduce((sum, value) => sum + Math.pow(value - mean1, 2), 0));
-    const stdDev2 = Math.sqrt(data2.reduce((sum, value) => sum + Math.pow(value - mean2, 2), 0));
-  
-    let correlation = covariance / (stdDev1 * stdDev2);
-  
-    // Fixing floating-point precision issues
-    if (Math.abs(correlation) > 0.999999) {
-      correlation = Math.sign(correlation); // Set to exactly 1 or -1
-    }
-  
-    return correlation;
-  }
-  
+  updateHeatmapData(correlationMatrix: Record<string, Record<string, number>>) {
+    const tickers = Object.keys(correlationMatrix);
 
-  updateHeatmapData(historicalData: Record<string, TickerHistoricalData>) {
-    const tickers = Object.keys(historicalData);
-    const prices = tickers.map((ticker) => historicalData[ticker].historical_data.map((data) => data.price));
-
-    const correlationMatrix: number[][] = [];
-
-    // Calculate the correlation matrix
-    for (let i = 0; i < tickers.length; i++) {
-      correlationMatrix[i] = [];
-      for (let j = 0; j < tickers.length; j++) {
-        const correlation = this.calculateCorrelation(prices[i], prices[j]);
-        correlationMatrix[i][j] = correlation;
-      }
-    }
-
-    // Prepare data for heatmap
-    const heatmapData = tickers.map((ticker, i) => ({
+    // Prepare data for heatmap from the received correlation matrix
+    const heatmapData = tickers.map((ticker) => ({
       name: ticker,
-      data: tickers.map((otherTicker, j) => ({
+      data: tickers.map((otherTicker) => ({
         x: otherTicker,
-        y: correlationMatrix[i][j],
+        y: correlationMatrix[ticker][otherTicker],
       })),
     }));
 
@@ -166,7 +123,17 @@ class HeatmapComponent extends React.Component<HeatmapComponentProps, HeatmapCom
 
   render() {
     return (
-      <Box p={4} shadow="sm" borderWidth="0.8px" borderRadius="lg" ml={4} minW="150px" textAlign="center" mb={8} bg="#FFFFFF">
+      <Box
+        p={4}
+        shadow="sm"
+        borderWidth="0.8px"
+        borderRadius="lg"
+        ml={4}
+        minW="150px"
+        textAlign="center"
+        mb={8}
+        bg="#FFFFFF"
+      >
         <ReactApexChart
           options={this.state.chartOptions}
           series={this.state.heatmapData}

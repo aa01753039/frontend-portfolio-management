@@ -40,7 +40,7 @@ interface OptimizationResult {
   confidence_level: number;
   value_at_risk: ValueAtRisk;
   historical_data: Record<string, HistoricalData>;
-  correlation_matrix: number[][];
+  correlation_matrix:  Record<string, Record<string, number>>;
 }
 
 interface FinalReturn {
@@ -92,6 +92,11 @@ interface QuestionnaireResponse {
   investment_horizon: InvestmentHorizon;
 }
 
+interface PortfolioCalculator {
+  investment_term: number;
+  target_return?: number;
+  risk_limit?: number;
+}
 
-export type { FinalReturn,  QuestionnaireResponse };
+export type { FinalReturn,  QuestionnaireResponse, PortfolioCalculator, };
 export { Objective, AgeGroup, InvestmentGoal, LossReaction, InvestmentHorizon, };

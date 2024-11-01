@@ -1,13 +1,14 @@
 import { Box, Flex, Icon, Text, useColorModeValue } from "@chakra-ui/react";
 
 import { Link } from "@tanstack/react-router";
-import { FaClipboardQuestion } from "react-icons/fa6";
+import { FaClipboardQuestion, FaCalculator} from "react-icons/fa6";
 
 
 
 
 const items = [
   { icon: FaClipboardQuestion, title: "Questionario", path: "/" },
+  {icon: FaCalculator, title: "Calculadora", path: "/calculator" },
 
 ];
 
